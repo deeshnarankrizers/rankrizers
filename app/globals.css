@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --radius: 0.5rem;
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+}
+
+* {
+  box-sizing: border-box;
+}
+.rr-btn {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 36px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+.rr-btn-3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 45px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+.rr-form input:not([type="checkbox"]),
+.rr-form select,
+.rr-form textarea {
+  width: 100%;
+  border-radius: var(--radius);
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.rr-form-a {
+  --tw-text-opacity: 1;
+  color: rgb(214 31 105 / var(--tw-text-opacity, 1));
+  text-decoration-line: none;
+}
+.rr-btn-3 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 45px;
+  cursor: pointer;
+  user-select: none;
+  align-items: center;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+.scale-110, .scale-125 {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
