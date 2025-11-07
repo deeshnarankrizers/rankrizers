@@ -4,68 +4,41 @@ import { useState } from "react";
 import ActionButton from "./ui/ActionButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
-type Inputs = {
-  email: string;
-  password: string;
-};
+import { loginUser } from "@/services/authService";
+import { loginPayload } from "@/types/auth";
+
 export default function LoginSection() {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Inputs>();
-  const router=useRouter()
+  } = useForm<loginPayload>();
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try { 
+
+  //login api call
+  const onSubmit: SubmitHandler<loginPayload> = async (data) => {
+    try {
       const dummyEmail = "aromalsurendran325@gmail.com";
       const dummmyPswd = "Aromal@1998";
-      if (data?.email === dummyEmail && data?.password === dummmyPswd)
-      {
-        // const token = 'dummy-token'
-        // const response = NextResponse.json({ success: true, token })
-        // response.cookies.set({
-        //   name: "token",
-        //   value: token,
-        //   httpOnly: true,
-        //   path: '/',
-        //   maxAge:60*60
-        // });
+      if (data?.email === dummyEmail && data?.password === dummmyPswd) {
         reset();
-        router.push('/home')
-        return 
+        router.push("/home");
+        return;
       }
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      const result: { token?: string; message?: string } = await res.json()
-      if (res.ok)
-      {
-       
+      const result = await loginUser(data);
+     
+      if (result?.token) {
         reset();
-       router.push("/home"); 
+        router.push("/home");
+      } else {
+        alert(result?.message || "Login failed. Please try again.");
       }
-      else {
-        alert(result?.message)
-      }
-      console.log("res==>", res)
-      router.push('/home')
+    } catch (err) {
+      console.log("Something went wrong", err);
     }
-    catch (err)
-    {
-      console.log("Something went wrong",err)
-    }
-
-  }
+  };
 
   return (
     <div className="relative bg-[#f3f8fb] min-h-dvh">
